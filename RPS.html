@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+       
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+
+        height: 100vh;
+        background: linear-gradient(45deg, #f5f1e3,
+                #2b2520);
+    }
+
+    .container {
+        width: 30%;
+        border: 1px solid black;
+        min-height: 300px;
+        padding: 30px 40px;
+        background: #ffffff;
+        border-radius: 20px;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+    }
+
+    .scores {
+        margin: auto;
+        text-align: center;
+    }
+
+    .scores p {
+        font-size: 25px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    .hands {
+        display: flex;
+        justify-content: space-around;
+        padding-top: 20px;
+    }
+
+    .hands button {
+        border: none;
+    }
+
+    .hands button i {
+        font-size: 50px;
+        color: red;
+    }
+
+    .details {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    #users-choice,
+    #computer-choice,
+    #result {
+        padding: 5px;
+        letter-spacing: 0.5px;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="scores">
+            <p>
+                Computer score:<span id="computer-score"></span>
+            </p>
+            <p>
+                User score:<span id="user-score"></span>
+            </p>
+        </div>
+        <div class="hands">
+            <button onclick="checking('rock')">
+                <i class="fa-regular fa-hand-back-fist"></i>
+            </button>
+            <button onclick="checking('paper')">
+                <i class="fa-regular fa-hand"></i>
+            </button>
+            <button onclick="checking('sciccors')">
+                <i class="fa-regular fa-hand-scissors"></i>
+            </button>
+
+        </div>
+        <div class="details">
+            <p id="users-choice"></p>
+            <p id="computer-choice"></p>
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <script>
+        let computer_score=0;
+        let user_score=0
+        var result = document.getElementById('result')
+        
+        function checking(input) {
+
+            let userChoices = {
+            'rock': {
+                'rock': 'draw',
+                'sciccors': "win",
+                'paper': 'lose'
+            },
+            'paper': {
+                'rock': 'win',
+                'sciccors': "lose",
+                'paper': 'draw'
+            },
+            'sciccors': {
+                'rock': 'lose',
+                'sciccors': "draw",
+                'paper': 'win'
+            }
+
+        }
+            let choices = ['rock', 'paper', 'sciccors']
+            let num = Math.floor(Math.random() * 3)
+            // console.log(num)
+            document.getElementById('computer-choice').innerHTML=` Computer choose :<span> ${choices[num].toUpperCase()} </span>`;
+            document.getElementById('users-choice').innerHTML=`User choose: <span>${input.toUpperCase()}</span>`
+            let computer_choice=choices[num]
+            console.log(userChoices[input][computer_choice]);
+            switch(userChoices[input][computer_choice]){
+                case'win':
+                result.innerHTML='YOU WIN'
+                user_score++
+                break;
+                case'lose':
+                result.innerHTML='YOU LOOSE'
+                computer_score++
+                break;
+                default:
+                result.innerHTML='DRAW'
+
+            }
+            document.getElementById('computer-score').innerHTML=computer_score
+            document.getElementById('user-score').innerHTML=user_score
+
+        }
+
+    </script>
+</body>
+
+</html>
